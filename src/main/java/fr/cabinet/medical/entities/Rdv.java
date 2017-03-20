@@ -5,7 +5,7 @@
  */
 package fr.cabinet.medical.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -67,7 +67,6 @@ public class Rdv implements Serializable{
         return patient;
     }
 
-    @JsonIgnore
     public Creneau getCreneau() {
         return creneau;
     }

@@ -61,6 +61,7 @@ public class CabinetRestService {
     
     @POST
     @Path("/takeRDV")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void takeRDV(@FormParam("date") String d , @FormParam("code") Long codePatient) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");        
         Date date;        
@@ -80,6 +81,7 @@ public class CabinetRestService {
     
     @POST
     @Path("/editRDV")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void editRDV(@FormParam("code") Long code, @FormParam("date") String newDate ) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {

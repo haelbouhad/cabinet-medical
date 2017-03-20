@@ -65,7 +65,9 @@ public class CabinetEJBImpl implements ICabinetLocal {
 
     @Override
     public void editRDV(Long code, Date newDate) {
-        Rdv r = em.find(Rdv.class, code);
+        Query q = em.createQuery("select r from Rdv r where r.patient.code = :x");
+        q.setParameter("x", code);
+        Rdv r = (Rdv) q.getSingleResult();
         r.setDate(newDate);
         em.persist(r);
     }

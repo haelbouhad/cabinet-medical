@@ -62,6 +62,7 @@ public class Creneau implements Serializable{
         return fin;
     }
 
+
     public Medecin getMedecin() {
         return medecin;
     }
@@ -81,6 +82,7 @@ public class Creneau implements Serializable{
     public void setFin(Date fin) {
         this.fin = fin;
     }
+
 
     public void setMedecin(Medecin medecin) {
         this.medecin = medecin;

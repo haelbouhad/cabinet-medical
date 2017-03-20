@@ -5,7 +5,6 @@
  */
 package fr.cabinet.medical.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Entity;
@@ -32,7 +31,7 @@ public class Patient implements Serializable{
     private String prenom;
     
     @OneToMany(mappedBy="patient",fetch=FetchType.LAZY)
-    private Collection<Rdv> rdvs;
+    private transient Collection<Rdv> rdvs;
    
 
     public Patient() {
@@ -69,7 +68,6 @@ public class Patient implements Serializable{
         this.prenom = prenom;
     }
 
-    @JsonIgnore
     public Collection<Rdv> getRdvs() {
         return rdvs;
     }
