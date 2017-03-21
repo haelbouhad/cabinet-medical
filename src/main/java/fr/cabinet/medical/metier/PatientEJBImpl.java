@@ -25,7 +25,7 @@ public class PatientEJBImpl implements IPatientLocal, IPatientRemote {
     @Override
     public Long addPatient(Patient p) {
         em.persist(p);
-        return p.getCode();
+        return p.getId();
     }
 
     @Override

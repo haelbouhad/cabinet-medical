@@ -24,7 +24,7 @@ public class Patient implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long code;
+    private Long id;
     
     private String nom;
     
@@ -44,8 +44,8 @@ public class Patient implements Serializable{
 
    
     
-    public Long getCode() {
-        return code;
+    public Long getId() {
+        return id;
     }
 
     public String getNom() {
@@ -56,8 +56,8 @@ public class Patient implements Serializable{
         return prenom;
     }
 
-    public void setCode(Long code) {
-        this.code = code;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setNom(String nom) {
