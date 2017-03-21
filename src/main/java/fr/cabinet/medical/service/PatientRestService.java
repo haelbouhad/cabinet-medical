@@ -40,7 +40,7 @@ public class PatientRestService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Long addPatient(Patient p) {
+    public Long create(Patient p) {
         return patientDao.create(p);
     }
 
