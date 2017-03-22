@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CreneauDao implements ICreneauDao {
     
-    @PersistenceContext
+    @PersistenceContext(name = "UP")
     protected EntityManager em ;
     
     @Override

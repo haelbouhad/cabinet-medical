@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class RdvDao implements IRdvDao {
 
-    @PersistenceContext
+    @PersistenceContext(name = "UP")
     protected EntityManager em ;
    
     @Override

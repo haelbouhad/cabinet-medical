@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class PatientDao implements IPatientDao {
 
-    @PersistenceContext
+    @PersistenceContext(name = "UP")
     protected EntityManager em ;
     
     @Override
