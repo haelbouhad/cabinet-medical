@@ -28,14 +28,14 @@ public class Creneau implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Code;
+    private Long id;
 
     private Date debut;
     
     private Date fin;
     
     @ManyToOne
-    @JoinColumn(name = "code_medecin")
+    @JoinColumn(name = "id_medecin") 
     private Medecin medecin;
     
     @OneToMany(mappedBy = "creneau", fetch = FetchType.LAZY)
@@ -50,8 +50,8 @@ public class Creneau implements Serializable{
         this.medecin = medecin;
     }
 
-    public Long getCode() {
-        return Code;
+    public Long getId() {
+        return id;
     }
 
     public Date getDebut() {
@@ -71,8 +71,8 @@ public class Creneau implements Serializable{
         return rdvs;
     }
 
-    public void setCode(Long Code) {
-        this.Code = Code;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setDebut(Date debut) {

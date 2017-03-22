@@ -25,16 +25,16 @@ public class Rdv implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRdv;
+    private Long id;
     
     private Date date;
     
     @ManyToOne
-    @JoinColumn(name = "code_patient")
+    @JoinColumn(name = "id_patient")
     private Patient patient;
     
     @ManyToOne
-    @JoinColumn(name = "code_creneau")
+    @JoinColumn(name = "id_creneau")
     private Creneau creneau;
 
     public Rdv() {
@@ -47,16 +47,16 @@ public class Rdv implements Serializable{
     
     
 
-    public Long getIdRdv() {
-        return idRdv;
+    public Long getId() {
+        return id;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setIdRdv(Long idRdv) {
-        this.idRdv = idRdv;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setDate(Date date) {
@@ -79,12 +79,4 @@ public class Rdv implements Serializable{
         this.creneau = creneau;
     }
 
-    
-
-    
-    
-    
-    
-    
-    
 }

@@ -25,7 +25,7 @@ public class MedecinEJBImpl implements IMedecinLocal, IMedecinRemote{
     @Override
     public Long addMedecin(Medecin m) {
         em.persist(m);
-        return m.getCode();
+        return m.getId();
     }
 
     @Override

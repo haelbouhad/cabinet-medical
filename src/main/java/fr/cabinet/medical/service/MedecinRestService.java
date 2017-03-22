@@ -5,12 +5,20 @@
  */
 package fr.cabinet.medical.service;
 
+import fr.cabinet.medical.dao.IMedecinDao;
+import fr.cabinet.medical.dao.MedecinDao;
 import fr.cabinet.medical.entities.Medecin;
-import fr.cabinet.medical.metier.IMedecinLocal;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -20,39 +28,54 @@ import javax.ws.rs.core.MediaType;
  *
  * @author hassan
  */
-@Stateless
-@Path("/medecin")
+@Path("/medecins")
+@Produces(MediaType.APPLICATION_JSON)
 public class MedecinRestService {
     
+    private static final Logger LOGGER = Logger.getLogger(MedecinRestService.class.getName()) ;
+    
     @EJB
-    private IMedecinLocal metier;
+    private IMedecinDao medecinDao;
 
-    @GET
-    @Path("/add/{nom}/{prenom}")
-    public Long addMedecin(@PathParam(value = "nom") String nom, @PathParam(value = "prenom") String prenom) {
-        return metier.addMedecin(new Medecin(nom, prenom));
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Long create(Medecin m)
+    {
+        LOGGER.log(Level.INFO, "POST /medecins");
+        return medecinDao.create(m) ;
     }
 
     @GET
-    @Path("/getAll")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Medecin> getAllMedecins() {
-        return metier.getAllMedecins();
+    public List<Medecin> getAll() {
+        LOGGER.log(Level.INFO, "GET /medecins");
+        return medecinDao.getAll();
     }
 
     @GET
-    @Path("/{code}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Medecin getMedecin(@PathParam(value = "code") Long code) {
-        return metier.getMedecin(code);
-    }
-
-    @GET
-    @Path("/remove/{code}")
-    public void supprimerMedecin(@PathParam(value = "code") Long code) {
-        metier.supprimerMedecin(code);
+    @Path("/{id}")
+    public Medecin getOne(@PathParam(value = "id") Long id) {
+        LOGGER.log(Level.INFO, "GET /medecins/{0}", id);
+        return medecinDao.getOne(id) ;
     }
     
+    @Path("/{id}")
+    @PUT
+    public void update(@PathParam("id") Long id, Medecin m) 
+    {
+        LOGGER.log(Level.INFO, "PUT /medecins/{0}", id);
+        LOGGER.log(Level.INFO, m.toString());
+        if(m.getId() == null || !Objects.equals(m.getId(), id)) throw new BadRequestException() ;
+        Medecin med = medecinDao.getOne(id) ;
+        med.setNom(m.getNom());
+        med.setPrenom(m.getPrenom());
+        medecinDao.update(m);
+    }
     
-    
+    @Path("/{id}")
+    @DELETE
+    public void delete(@PathParam("id") Long id)
+    {
+        LOGGER.log(Level.INFO, "DELETE /medecins/{0}", id);
+        medecinDao.delete(id);
+    }
 }
