@@ -9,10 +9,13 @@ var app = angular.module("cabinetApp", [
     'cabinetApp.rdv', 
     'cabinetApp.creneau', 
     'cabinetApp.medecin',
-    'cabinetApp.patient'
+    'cabinetApp.patient',
+    'cabinetApp.services'
 ]);
 
-app.controller("cabinetApp", function ($scope, $http) {
+app.constant('apiUrl', window.location.origin + '/CabinetMedical')
+
+app.controller("cabinetApp", function (apiUrl, $scope, $http, $location) {
     console.log('cabinetApp')
 })
 
