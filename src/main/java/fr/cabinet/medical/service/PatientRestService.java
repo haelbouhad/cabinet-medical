@@ -64,6 +64,7 @@ public class PatientRestService {
     {
         LOGGER.log(Level.INFO, "PUT /patients/{0}", id);
         LOGGER.log(Level.INFO, p.toString());
+        LOGGER.log(Level.INFO, p.getNom() + '-' + p.getPrenom());
         if(p.getId() == null || !Objects.equals(p.getId(), id)) throw new BadRequestException() ;
         Patient patient = patientDao.getOne(id) ;
         patient.setNom(p.getNom());

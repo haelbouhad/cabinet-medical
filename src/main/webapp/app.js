@@ -38,10 +38,20 @@ app.config(['$locationProvider', '$routeProvider','$httpProvider', function($loc
     templateUrl: 'sections/medecin.html',
     controller: 'medecinCtrl'
   });
+  
+  $routeProvider.when('/medecin/edit', {
+    templateUrl: 'sections/medecin/edit.html',
+    controller: 'medecinEditCtrl'
+  });
 
   $routeProvider.when('/patient', {
     templateUrl: 'sections/patient.html',
     controller: 'patientCtrl'
+  });
+  
+  $routeProvider.when('/patient/edit', {
+    templateUrl: 'sections/patient/edit.html',
+    controller: 'patientEditCtrl'
   });
 
   $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript;charset=UTF-8';

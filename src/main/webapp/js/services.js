@@ -9,6 +9,14 @@ angular.module('cabinetApp.services', [])
                         method: 'GET', 
                         url: apiUrl+'/ws/'+type
                     }) ; 
+        },
+        edit  : function(type, id, object){
+            console.log(apiUrl+'/ws/'+type + '/' + id)
+            return $http({
+                        method: 'PUT', 
+                        url: apiUrl+'/ws/'+type + '/' + id,
+                        data : object
+                    }) ; 
         }
     };
 })

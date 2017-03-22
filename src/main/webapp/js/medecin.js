@@ -21,13 +21,38 @@ angular.module('cabinetApp.medecin', ['ngRoute'])
          }) ;
          
          
-        $scope.edit = function(id){
-            console.log(id)
+        $scope.edit = function(medecin){
+            $location.path('/medecin/edit').search({ param : medecin })
         }
         
-        $scope.delete = function(id){
-            console.log(id)
+        $scope.delete = function(medecin){
+            console.log(medecin.id)
         }
   
   
-}]);
+}])
+
+.controller('medecinEditCtrl', ['cabinetService', '$routeParams', '$http','$location','$scope',function(cabinetService, $routeParams, $http,$location,$scope) {
+        
+        console.log('medecinditCtrl')  
+
+        
+        $scope.medecin= $routeParams.param;
+         
+        $scope.cancel = function(){
+            console.log('cancel')
+            $location.path('/medecin').search({})
+        }
+        
+        $scope.submit = function(){
+            
+            cabinetService.edit('medecins', $scope.medecin.id, $scope.medecin).then(
+                function successCallback(response) {
+                    $location.path('/medecin').search({})
+                }, function errorCallback(response) {
+                    //.handle(response.status,'/') ;
+            }) ;
+            
+        }
+  
+}])

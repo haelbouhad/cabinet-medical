@@ -1,0 +1,26 @@
+<div class="col-lg-12">
+    
+    <div class="row">
+            <h2 style="display: inline-block;">Modifier le patient (Réf : {{patient.id}})</h2>
+    </div>
+
+    <form role="form">
+
+        <div class="form-group">
+            <label>Nom</label>
+            <input class="form-control" ng-model="patient.nom" />
+        </div>
+        
+        <div class="form-group">
+            <label>Prénom</label>
+            <input class="form-control" ng-model="patient.prenom" />
+        </div>        
+
+        <div class="pull-right">
+            <button  class="btn btn-default" ng-click="cancel()">Annuler</button>
+            <button  class="btn btn-default" ng-click="submit()">Valider</button>
+        </div>
+
+    </form>
+
+</div>
