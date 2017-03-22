@@ -20,7 +20,10 @@ angular.module('cabinetApp.medecin', ['ngRoute'])
                     //.handle(response.status,'/') ;
          }) ;
          
-         
+        $scope.add = function(){
+            $location.path('/medecin/edit')
+        }
+        
         $scope.edit = function(medecin){
             $location.path('/medecin/edit').search({ param : medecin })
         }
@@ -38,6 +41,18 @@ angular.module('cabinetApp.medecin', ['ngRoute'])
 
         
         $scope.medecin= $routeParams.param;
+        
+        if($scope.medecin != null)
+            $scope.operation = {
+                id      :  'edit',
+                title : 'Modifier le'
+            }
+        else
+            $scope.operation =  {
+                id      : 'create',
+                title : 'Ajouter un'
+            }
+        
          
         $scope.cancel = function(){
             console.log('cancel')
@@ -46,7 +61,7 @@ angular.module('cabinetApp.medecin', ['ngRoute'])
         
         $scope.submit = function(){
             
-            cabinetService.edit('medecins', $scope.medecin.id, $scope.medecin).then(
+            cabinetService.maj($scope.operation.id, 'medecins', $scope.medecin.id, $scope.medecin).then(
                 function successCallback(response) {
                     $location.path('/medecin').search({})
                 }, function errorCallback(response) {

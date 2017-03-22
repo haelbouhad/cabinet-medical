@@ -19,7 +19,10 @@ angular.module('cabinetApp.patient', ['ngRoute'])
                 }, function errorCallback(response) {
                     //.handle(response.status,'/') ;
          }) ;
-         
+
+        $scope.add = function(){
+            $location.path('/patient/edit')
+        }
          
         $scope.edit = function(patient){
             $location.path('/patient/edit').search({ param : patient })
@@ -36,6 +39,18 @@ angular.module('cabinetApp.patient', ['ngRoute'])
         console.log('patientEditCtrl')  
 
         $scope.patient = $routeParams.param;
+        
+        if($scope.patient != null)
+            $scope.operation = {
+                id      :  'edit',
+                title : 'Modifier le'
+            }
+        else
+            $scope.operation =  {
+                id      : 'create',
+                title : 'Ajouter un'
+            }
+        
          
         $scope.cancel = function(){
             console.log('cancel')
@@ -44,7 +59,7 @@ angular.module('cabinetApp.patient', ['ngRoute'])
         
         $scope.submit = function(){
             
-            cabinetService.edit('patients', $scope.patient.id, $scope.patient).then(
+            cabinetService.maj($scope.operation.id, 'patients', $scope.patient.id, $scope.patient).then(
                 function successCallback(response) {
                     $location.path('/patient').search({})
                 }, function errorCallback(response) {

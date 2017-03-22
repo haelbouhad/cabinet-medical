@@ -1,7 +1,13 @@
 <div class="col-lg-12">
     
     <div class="row">
-            <h2 style="display: inline-block;">Modifier le patient (Réf : {{patient.id}})</h2>
+            <h2 style="display: inline-block;">
+                {{operation.title}} patient 
+                
+                <span ng-if="patient">
+                    (Réf : {{patient.id}})
+                </span>
+            </h2>
     </div>
 
     <form role="form">

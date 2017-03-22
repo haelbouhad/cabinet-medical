@@ -10,11 +10,17 @@ angular.module('cabinetApp.services', [])
                         url: apiUrl+'/ws/'+type
                     }) ; 
         },
-        edit  : function(type, id, object){
-            console.log(apiUrl+'/ws/'+type + '/' + id)
+        maj  : function(op, type, id, object){
+            if(op == 'edit'){
+                var method = 'PUT'
+                var url = apiUrl+'/ws/'+type + '/' + id
+            }else{
+                var method = 'POST'
+                var url = apiUrl+'/ws/'+type
+            }
             return $http({
-                        method: 'PUT', 
-                        url: apiUrl+'/ws/'+type + '/' + id,
+                        method: method, 
+                        url: url,
                         data : object
                     }) ; 
         }
