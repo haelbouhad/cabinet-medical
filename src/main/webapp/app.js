@@ -35,7 +35,7 @@ app.config(['$locationProvider', '$routeProvider','$httpProvider', function($loc
   });
 
   $routeProvider.when('/medecin', {
-    templateUrl: 'sections/medecin.html',
+    templateUrl: 'sections/medecin/list.html',
     controller: 'medecinCtrl'
   });
   
@@ -45,7 +45,7 @@ app.config(['$locationProvider', '$routeProvider','$httpProvider', function($loc
   });
 
   $routeProvider.when('/patient', {
-    templateUrl: 'sections/patient.html',
+    templateUrl: 'sections/patient/list.html',
     controller: 'patientCtrl'
   });
   

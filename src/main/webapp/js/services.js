@@ -23,6 +23,12 @@ angular.module('cabinetApp.services', [])
                         url: url,
                         data : object
                     }) ; 
+        },
+        delete : function(type, id){
+            return $http({
+                        method: 'DELETE', 
+                        url: apiUrl+'/ws/'+type+'/' + id
+                    }) ; 
         }
     };
 })

@@ -9,7 +9,7 @@
 
 angular.module('cabinetApp.medecin', ['ngRoute'])
 
-.controller('medecinCtrl', ['cabinetService', '$http','$location','$scope',function(cabinetService, $http,$location,$scope) {
+.controller('medecinCtrl', ['$route','cabinetService', '$http','$location','$scope',function($route, cabinetService, $http,$location,$scope) {
         
         console.log('medecinCtrl')
 
@@ -29,7 +29,15 @@ angular.module('cabinetApp.medecin', ['ngRoute'])
         }
         
         $scope.delete = function(medecin){
-            console.log(medecin.id)
+            var r = confirm("Etes vous sur de bien vouloir supprimer ce medecin ?");
+            if (r == true) {
+                cabinetService.delete('medecins', medecin.id).then(
+                    function successCallback(response) {
+                        $route.reload();
+                    }, function errorCallback(response) {
+                        //.handle(response.status,'/') ;
+                }) ;
+            }
         }
   
   
