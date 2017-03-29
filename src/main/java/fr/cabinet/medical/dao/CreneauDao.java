@@ -32,7 +32,7 @@ public class CreneauDao implements ICreneauDao {
     public List<Creneau> getCrenauxLibres()
     {
         em.flush();
-        return this.em.createQuery("SELECT c FROM Creneau c WHERE c.rdv is null").getResultList() ;
+        return this.em.createQuery("SELECT c FROM Creneau c WHERE c.rdvs is empty ").getResultList() ;
     }
 
     @Override

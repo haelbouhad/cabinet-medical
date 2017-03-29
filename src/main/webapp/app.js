@@ -25,13 +25,18 @@ app.config(['$locationProvider', '$routeProvider','$httpProvider', function($loc
 
   // Routing 
   $routeProvider.when('/rdv', {
-    templateUrl: 'sections/rdv.html',
+    templateUrl: 'sections/rdv/list.html',
     controller: 'rdvCtrl'
   });
   
   $routeProvider.when('/creneau', {
-    templateUrl: 'sections/creneau.html',
+    templateUrl: 'sections/creneau/list.html',
     controller: 'creneauCtrl'
+  });
+  
+  $routeProvider.when('/creneau/edit', {
+    templateUrl: 'sections/creneau/edit.html',
+    controller: 'creneauEditCtrl'
   });
 
   $routeProvider.when('/medecin', {

@@ -21,7 +21,8 @@ public class RestApplication extends Application {
     public Set<Class<?>> getClasses(){
         Set<Class<?>> service = new HashSet<>();
         
-        service.add(CabinetRestService.class);
+        service.add(CreneauRestService.class);
+        service.add(RdvRestService.class);
         service.add(MedecinRestService.class);
         service.add(PatientRestService.class);
                 

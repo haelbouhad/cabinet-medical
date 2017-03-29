@@ -18,6 +18,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -38,6 +41,7 @@ public class Creneau implements Serializable{
     @JoinColumn(name = "id_medecin") 
     private Medecin medecin;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "creneau", fetch = FetchType.LAZY)
     private Collection<Rdv> rdvs;
 
@@ -67,9 +71,6 @@ public class Creneau implements Serializable{
         return medecin;
     }
 
-    public Collection<Rdv> getRdvs() {
-        return rdvs;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -86,14 +87,6 @@ public class Creneau implements Serializable{
 
     public void setMedecin(Medecin medecin) {
         this.medecin = medecin;
-    }
-
-    public void setRdvs(Collection<Rdv> rdvs) {
-        this.rdvs = rdvs;
-    }
-
-    
-    
-    
+    }  
     
 }
