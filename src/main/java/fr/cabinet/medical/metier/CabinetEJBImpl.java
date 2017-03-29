@@ -54,7 +54,7 @@ public class CabinetEJBImpl implements ICabinetLocal {
         if(!rdvs.isEmpty())
             throw new RuntimeException("le rendez-vous est déjà pris");
         Patient p = em.find(Patient.class, codePatient);
-        em.persist(new Rdv(d, p));
+        //em.persist(new Rdv(d, p));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CabinetEJBImpl implements ICabinetLocal {
         Query q = em.createQuery("select r from Rdv r where r.patient.code = :x");
         q.setParameter("x", code);
         Rdv r = (Rdv) q.getSingleResult();
-        r.setDate(newDate);
+        //r.setDate(newDate);
         em.persist(r);
     }
 
