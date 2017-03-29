@@ -29,16 +29,16 @@ angular.module('cabinetApp.creneau', ['ngRoute', 'datetime'])
             $location.path('/creneau/edit').search({ param : creneau })
         }
         
-        $scope.delete = function(rdv){
-            /*var r = confirm("Etes vous sur de bien vouloir supprimer ce RDV ?");
+        $scope.delete = function(creneau){
+            var r = confirm("Etes vous sur de bien vouloir supprimer ce creneau ?");
             if (r == true) {
-                cabinetService.delete('patients', patient.id).then(
+                cabinetService.delete('creneaux', creneau.id).then(
                     function successCallback(response) {
                         $route.reload();
                     }, function errorCallback(response) {
                         //.handle(response.status,'/') ;
                 }) ;
-            }*/
+            }
         }
   
 }])

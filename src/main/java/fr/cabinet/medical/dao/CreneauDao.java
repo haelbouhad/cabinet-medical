@@ -59,8 +59,9 @@ public class CreneauDao implements ICreneauDao {
     }
     
     @Override
-    public void delete(Creneau c)
+    public void delete(Long id)
     {
+        Creneau c = em.getReference(Creneau.class, id) ;
         em.remove(c);
     }
     

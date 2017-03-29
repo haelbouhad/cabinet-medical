@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -72,6 +73,15 @@ public class CreneauRestService {
         creneau.setFin(c.getFin());
         creneauDao.update(creneau);
     }
+    
+    @Path("/{id}")
+    @DELETE
+    public void delete(@PathParam("id") Long id)
+    {
+        LOGGER.log(Level.INFO, "DELETE /creneaux/{0}", id);
+        creneauDao.delete(id);
+    }  
+    
     /*
     @POST
     @Path("/takeRDV")

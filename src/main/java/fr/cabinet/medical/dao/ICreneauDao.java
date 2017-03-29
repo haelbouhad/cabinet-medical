@@ -17,7 +17,7 @@ public interface ICreneauDao {
 
     Long create(Creneau c);
 
-    void delete(Creneau c);
+    void delete(Long id);
 
     boolean exists(Creneau c);
 
