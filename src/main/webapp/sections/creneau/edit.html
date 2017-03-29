@@ -4,21 +4,38 @@
             <h2 style="display: inline-block;">
                 {{operation.title}} créneau 
                 
-                <span ng-if="creneau">
+                <span ng-if="operation.id == 'edit'">
                     (Médecin : {{creneau.medecin.nom}} {{creneau.medecin.prenom}}))
                 </span>
             </h2>
     </div>
 
-    <form role="form">
+    <form role="form" name="myForm">
 
-        <div class="form-group">
+        
+        <div class="form-group" ng-if="operation.id == 'create'"> 
+            <label>
+                Médecin
+            </label>
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                      
+                    <select  class="selectpicker form-control" ng-model="creneau.medecin" ng-change="change()" required>
+                        <option ng-repeat="medecin in medecins" value="{{medecin}}">{{medecin.id}} -- {{medecin.nom}} {{medecin.prenom}}</option>
+                    </select>
+
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group"> 
             <div class="row">
                 <div class='col-md-6'>
                     <label>Heure de début</label>
                     <div class="form-group">
                         <div class='input-group date' >
-                            <input type="text" datetime="dd/MM/yyyy HH:mm" ng-model="creneau.debut" class="form-control" />
+                            <input type="text" name="debut" datetime="dd/MM/yyyy HH:mm" ng-model="creneau.debut" class="form-control" required />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -29,7 +46,7 @@
                     <label>Heure de fin</label>
                     <div class="form-group">
                         <div class='input-group date' >
-                            <input type="text" datetime="dd/MM/yyyy HH:mm" ng-model="creneau.fin" class="form-control" />
+                            <input type="text" name="fin" datetime="dd/MM/yyyy HH:mm" ng-model="creneau.fin" class="form-control" required />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -39,11 +56,14 @@
             </div>
         </div>      
 
-        <div class="pull-right">
+        <div class="pull-right">                 
+            <span style="color:red">{{msg}}</span>
             <button  class="btn btn-default" ng-click="cancel()">Annuler</button>
-            <button  class="btn btn-default" ng-click="submit()">Valider</button>
+            <button  class="btn btn-default " ng-click="submit(myForm.$valid)">Valider</button>
         </div>
-
+        <!--h1>{{myForm.debut.$valid}}</h1>
+        <h1>{{myForm.fin.$valid}}</h1>
+        <h1>{{myForm.$valid}}</h1-->
     </form>
 
 </div>

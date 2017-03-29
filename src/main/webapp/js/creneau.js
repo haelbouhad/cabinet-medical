@@ -49,35 +49,60 @@ angular.module('cabinetApp.creneau', ['ngRoute', 'datetime'])
 
         $scope.creneau = $routeParams.param;
         
-        $scope.creneau.debut = new Date($scope.creneau.debut)
-        $scope.creneau.fin = new Date($scope.creneau.fin)
-        
-        if($scope.creneau != null)
+        // Le cas de modification
+        if($scope.creneau != null){
             $scope.operation = {
                 id      :  'edit',
                 title : 'Modifier le'
             }
-        else
+            $scope.creneau.debut = new Date($scope.creneau.debut)
+            $scope.creneau.fin = new Date($scope.creneau.fin)
+        } 
+        // Le cas d'un nouveau créneau
+        else{
             $scope.operation =  {
                 id      : 'create',
                 title : 'Ajouter un'
             }
+            
+            // Retrieve all medecins
+            cabinetService.getAll('medecins').then(
+                function successCallback(response) {
+                    $scope.medecins = response.data ;
+                }, function errorCallback(response) {
+                    //.handle(response.status,'/') ;
+            }) ;
+            
+            $scope.creneau = {}
+            
+        }
         
+        var jsonifyMedecin = function(){
+            if($scope.operation.id == 'create')
+                $scope.creneau.medecin = JSON.parse($scope.creneau.medecin)
+        }
+
          
         $scope.cancel = function(){
             console.log('cancel')
             $location.path('/creneau').search({})
         }
         
-        $scope.submit = function(){
+        $scope.submit = function(isValid){
             
-            console.log($scope.creneau.fin)
-            cabinetService.maj($scope.operation.id, 'creneaux', $scope.creneau.id, $scope.creneau).then(
-                function successCallback(response) {
-                    $location.path('/creneau').search({})
-                }, function errorCallback(response) {
-                    //.handle(response.status,'/') ;
-            }) ;
+            if(isValid){
+                
+                jsonifyMedecin()
+                
+                cabinetService.maj($scope.operation.id, 'creneaux', $scope.creneau.id, $scope.creneau).then(
+                    function successCallback(response) {
+                        $location.path('/creneau').search({})
+                    }, function errorCallback(response) {
+                        //.handle(response.status,'/') ;
+                }) ;
+            }
+            else
+                $scope.msg = "Votre saisie est invalide"
             
         }
   
