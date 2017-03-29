@@ -19,8 +19,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -41,7 +39,6 @@ public class Creneau implements Serializable{
     @JoinColumn(name = "id_medecin") 
     private Medecin medecin;
     
-    @JsonIgnore
     @OneToMany(mappedBy = "creneau", fetch = FetchType.LAZY)
     private Collection<Rdv> rdvs;
 
