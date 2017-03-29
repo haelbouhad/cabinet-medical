@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -27,7 +29,9 @@ public class Rdv implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Date date;
+    private Date debut;
+    
+    private Date fin;
     
     @ManyToOne
     @JoinColumn(name = "id_patient")
@@ -40,8 +44,9 @@ public class Rdv implements Serializable{
     public Rdv() {
     }
 
-    public Rdv(Date date, Patient patient) {
-        this.date = date;
+    public Rdv(Date debut, Date fin, Patient patient) {
+        this.debut = debut;
+        this.fin = fin;
         this.patient = patient;
     }
     
@@ -51,17 +56,27 @@ public class Rdv implements Serializable{
         return id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDebut() {
+        return debut;
+    }
+
+    public Date getFin() {
+        return fin;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDebut(Date debut) {
+        this.debut = debut;
     }
+
+    public void setFin(Date fin) {
+        this.fin = fin;
+    }
+
+    
 
     public Patient getPatient() {
         return patient;

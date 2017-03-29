@@ -5,14 +5,17 @@
  */
 package fr.cabinet.medical.service;
 
+import fr.cabinet.medical.dao.IRdvDao;
 import fr.cabinet.medical.entities.Creneau;
+import fr.cabinet.medical.entities.Patient;
 import fr.cabinet.medical.entities.Rdv;
-import fr.cabinet.medical.metier.ICabinetLocal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -31,33 +34,29 @@ import javax.ws.rs.core.MediaType;
  * @author ousmane
  */
 
-@Path("/cm")
-public class CabinetRestService {
+@Path("/rdvs")
+@Produces(MediaType.APPLICATION_JSON)
+public class RdvRestService {
+    
+    private static final Logger LOGGER = Logger.getLogger(RdvRestService.class.getName()) ;
     
     @EJB
-    private ICabinetLocal metier;
-
+    private IRdvDao rdvDao;
+    
     @POST
-    @Path("/addCreneau")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void addCreneau(@FormParam("debut") String d, @FormParam("fin") String f, @FormParam("code") Long codeMedecin) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date debut = df.parse(d);
-            Date fin   = df.parse(f);
-            metier.addCreneau(debut, fin, codeMedecin);
-        } catch (ParseException ex) {
-            throw new RuntimeException("Date error format");
-        }        
-    }
-
-    @GET
-    @Path("/getAll")
-    public List<Creneau> getAllCreneau() {
-        List<Creneau> list = metier.getAllCreneau();
-        return list;
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Long create(Rdv r) {
+        LOGGER.log(Level.INFO, "POST /rdvs");
+        return rdvDao.create(r);
     }
     
+    @GET
+    public List<Rdv> getAll() {
+        LOGGER.log(Level.INFO, "GET /rdvs");
+        return rdvDao.getAll();
+    }
+    
+    /*
     @POST
     @Path("/takeRDV")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -69,13 +68,13 @@ public class CabinetRestService {
         } catch (Exception ex) {
             throw new RuntimeException("Error date format");
         }
-        metier.takeRDV(date, codePatient);            
+        rdvDao.takeRDV(date, codePatient);            
     }
 
     @GET
     @Path("/annulerRDV/{code}")
     public void annulerRDV(@PathParam(value = "code") Long code) {
-        metier.annulerRDV(code);
+        rdvDao.annulerRDV(code);
     }
     
     @POST
@@ -85,7 +84,7 @@ public class CabinetRestService {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = df.parse(newDate);
-            metier.editRDV(code, date);
+            rdvDao.editRDV(code, date);
         } catch (ParseException ex) {
             throw new RuntimeException("Error date format");
         }
@@ -95,7 +94,7 @@ public class CabinetRestService {
     @Path("/getAllRDV")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Rdv> getAllRDV() {
-        return metier.getAllRDV();
+        return rdvDao.getAllRDV();
     }
-    
+    */
 }

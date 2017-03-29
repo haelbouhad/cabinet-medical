@@ -5,7 +5,9 @@
  */
 package fr.cabinet.medical.dao;
 
+import fr.cabinet.medical.entities.Patient;
 import fr.cabinet.medical.entities.Rdv;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -47,5 +49,10 @@ public class RdvDao implements IRdvDao {
     public void delete(Rdv a)
     {
         em.remove(a);
+    }
+    
+    @Override
+    public List<Rdv> getAll() {
+        return em.createQuery("SELECT r FROM Rdv r").getResultList() ;
     }
 }

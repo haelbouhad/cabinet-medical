@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <h2 style="display: inline-block;" >Liste des RDVs</h2>
+            <span class="pull-right" style="margin-top: 20px;margin-bottom: 10px;"> 
+                <button type="button" class="btn btn-default" ng-click="add()">
+                    <i class="fa fa-plus"></i>    
+                    Ajouter un nouveau
+                </button>
+            </span>
+        </div>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Patient</th>
+                            <th>Médecin affecté</th>
+                            <th>Date</th>
+                            <th>Heure de début</th>
+                            <th>Heure de fin</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rdv in rdvs">
+                            <td>{{rdv.id}}</td>
+                            <td>{{rdv.patient.nom}} {{rdv.patient.prenom}}</td>
+                            <td>{{rdv.creneau.medecin.nom}} {{rdv.creneau.medecin.prenom}}</td>
+                            <td>{{rdv.debut | date : "d MMMM y" }} </td>
+                            <td>{{rdv.debut | date : "HH:mm" }}</td>
+                            <td>{{rdv.fin   | date : "HH:mm" }}</td>
+                            <td>
+                                <button type="button" class="btn btn-default" ng-click="edit(rdv)">
+                                    <i class="fa fa-edit"></i>    
+                                    Modifier
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="delete(rdv)" >
+                                    <i class="fa fa-remove"></i>   
+                                    Supprimer
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

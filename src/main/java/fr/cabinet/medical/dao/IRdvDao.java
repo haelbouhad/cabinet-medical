@@ -6,6 +6,7 @@
 package fr.cabinet.medical.dao;
 
 import fr.cabinet.medical.entities.Rdv;
+import java.util.List;
 
 /**
  *
@@ -22,5 +23,7 @@ public interface IRdvDao {
     Rdv getOne(Long id);
 
     void update(Rdv rdv);
+    
+    List<Rdv> getAll();
     
 }
