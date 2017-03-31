@@ -7,7 +7,7 @@
 
 'use strict';
 
-angular.module('cabinetApp.rdv', ['ngRoute'])
+angular.module('cabinetApp.rdv', ['ngRoute', 'ui.rCalendar', 'datetime'])
 
 .controller('rdvCtrl', ['cabinetService', '$route', '$http','$location','$scope',function(cabinetService, $route,$http,$location,$scope) {
         
@@ -22,13 +22,9 @@ angular.module('cabinetApp.rdv', ['ngRoute'])
          }) ;
 
         $scope.add = function(){
-            $location.path('/rdv/edit')
+            $location.path('/rdv/add')
         }
          
-        $scope.edit = function(rdv){
-            $location.path('/rdv/edit').search({ param : rdv })
-        }
-        
         $scope.delete = function(rdv){
             /*var r = confirm("Etes vous sur de bien vouloir supprimer ce RDV ?");
             if (r == true) {
@@ -42,41 +38,109 @@ angular.module('cabinetApp.rdv', ['ngRoute'])
         }
   
 }])
-/*
-.controller('patientEditCtrl', ['cabinetService', '$routeParams', '$http','$location','$scope',function(cabinetService, $routeParams, $http,$location,$scope) {
-        
-        console.log('patientEditCtrl')  
 
-        $scope.patient = $routeParams.param;
+.controller('rdvAddCtrl', ['cabinetService', '$routeParams', '$http','$location','$scope',function(cabinetService, $routeParams, $http,$location,$scope) {
         
-        if($scope.patient != null)
-            $scope.operation = {
-                id      :  'edit',
-                title : 'Modifier le'
-            }
-        else
+        console.log('rdvAddCtrl')  
+
+        var init = function () {
+            
+            $scope.rdv = $routeParams.param;
+            //$scope.rdv.patient = JSON.stringify($scope.rdv.patient) 
+            
             $scope.operation =  {
-                id      : 'create',
-                title : 'Ajouter un'
+                    id      : 'create',
+                    title : 'Ajouter un'
             }
+            $scope.rdv = {}
+       
+        }
+
         
+        
+        // Retrieve all patients
+        cabinetService.getAll('patients').then(
+            function successCallback(response) {
+                $scope.patients = response.data ;  
+                init();
+            }, function errorCallback(response) {
+                //.handle(response.status,'/') ;
+        }) ;
+
+        var prepareData = function(){
+            // jsonifiy chosen patient
+            $scope.rdv.patient = JSON.parse($scope.rdv.patient)
+            // get the current creneau
+            $scope.rdv.creneau = $scope.chosenEvent.creneau
+        }
          
         $scope.cancel = function(){
             console.log('cancel')
-            $location.path('/patient').search({})
+            $location.path('/rdv').search({})
         }
         
-        $scope.submit = function(){
+        $scope.submit = function(isValid){
             
-            cabinetService.maj($scope.operation.id, 'patients', $scope.patient.id, $scope.patient).then(
+            if(isValid){
+                                
+                prepareData()
+                
+                console.log($scope.rdv)
+                
+                cabinetService.maj($scope.operation.id, 'rdvs', $scope.rdv.id, $scope.rdv).then(
+                    function successCallback(response) {
+                        $location.path('/rdv').search({})
+                    }, function errorCallback(response) {
+                        //.handle(response.status,'/') ;
+                }) ;
+                
+            }
+            else
+                $scope.msg = "Votre saisie est invalide"
+            
+        }
+        
+        /*-----------------------------------------*/
+
+        $scope.loadCreneaux = function () {
+
+            cabinetService.getAll('creneaux').then(
                 function successCallback(response) {
-                    $location.path('/patient').search({})
+                    $scope.creneaux= response.data ;  
+                    $scope.eventSource = getEvents();
                 }, function errorCallback(response) {
                     //.handle(response.status,'/') ;
             }) ;
-            
+
+        };
+
+        function getEvents() {
+
+            var events = [];
+
+            for(var index in $scope.creneaux) {
+
+                events.push({
+                        creneau  : $scope.creneaux[index],
+                        title: 'Médecin : '
+                                + $scope.creneaux[index].medecin.nom + ' ' + $scope.creneaux[index].medecin.prenom  ,
+                        startTime: new Date($scope.creneaux[index].debut) ,
+                        endTime: new Date($scope.creneaux[index].fin) ,
+                        allDay: false
+                });
+
+            }
+
+            return events;
         }
-  
+
+        $scope.onEventSelected = function (event) {
+            $scope.chosenEvent = event
+        };
+
+        $scope.onTimeSelected = function (selectedTime) {
+            $scope.chosenEvent = null 
+        };
+
 }])
-*/
 

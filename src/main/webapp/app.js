@@ -28,6 +28,11 @@ app.config(['$locationProvider', '$routeProvider','$httpProvider', function($loc
     templateUrl: 'sections/rdv/list.html',
     controller: 'rdvCtrl'
   });
+
+  $routeProvider.when('/rdv/add', {
+    templateUrl: 'sections/rdv/add.html',
+    controller: 'rdvAddCtrl'
+  });
   
   $routeProvider.when('/creneau', {
     templateUrl: 'sections/creneau/list.html',
