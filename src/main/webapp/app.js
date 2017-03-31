@@ -13,10 +13,11 @@ var app = angular.module("cabinetApp", [
     'cabinetApp.services'
 ]);
 
-app.constant('apiUrl', window.location.origin + '/cabinet') ;
+app.constant('apiUrl', window.location.origin + '/' + window.location.pathname.split('/')[1]) ;
 
 app.controller("cabinetApp", function (apiUrl, $scope, $http, $location) {
     console.log('cabinetApp') ;
+    console.log(apiUrl)
 }) ;
 
 app.config(['$locationProvider', '$routeProvider','$httpProvider', function($locationProvider, $routeProvider,$httpProvider) {
