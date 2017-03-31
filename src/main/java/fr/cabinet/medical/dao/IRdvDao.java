@@ -16,7 +16,7 @@ public interface IRdvDao {
 
     Long create(Rdv rdv);
 
-    void delete(Rdv rdv);
+    void delete(Long id);
 
     boolean exists(Rdv rdv);
 

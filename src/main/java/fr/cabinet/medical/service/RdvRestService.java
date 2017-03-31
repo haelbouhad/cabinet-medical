@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -56,45 +57,18 @@ public class RdvRestService {
         return rdvDao.getAll();
     }
     
-    /*
-    @POST
-    @Path("/takeRDV")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void takeRDV(@FormParam("date") String d , @FormParam("code") Long codePatient) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");        
-        Date date;        
-        try { 
-            date = df.parse(d);
-        } catch (Exception ex) {
-            throw new RuntimeException("Error date format");
-        }
-        rdvDao.takeRDV(date, codePatient);            
-    }
-
     @GET
-    @Path("/annulerRDV/{code}")
-    public void annulerRDV(@PathParam(value = "code") Long code) {
-        rdvDao.annulerRDV(code);
+    @Path("/{id}")
+    public Rdv getOne(@PathParam(value = "id") Long id) {
+        LOGGER.log(Level.INFO, "GET /rdvs/{0}", id);
+        return rdvDao.getOne(id) ;
     }
     
-    @POST
-    @Path("/editRDV")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void editRDV(@FormParam("code") Long code, @FormParam("date") String newDate ) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = df.parse(newDate);
-            rdvDao.editRDV(code, date);
-        } catch (ParseException ex) {
-            throw new RuntimeException("Error date format");
-        }
-    }
-    
-    @GET
-    @Path("/getAllRDV")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Rdv> getAllRDV() {
-        return rdvDao.getAllRDV();
-    }
-    */
+    @Path("/{id}")
+    @DELETE
+    public void delete(@PathParam("id") Long id)
+    {
+        LOGGER.log(Level.INFO, "DELETE /rdvs/{0}", id);
+        rdvDao.delete(id);
+    } 
 }

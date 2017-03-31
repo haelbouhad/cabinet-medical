@@ -26,15 +26,15 @@ angular.module('cabinetApp.rdv', ['ngRoute', 'ui.rCalendar', 'datetime'])
         }
          
         $scope.delete = function(rdv){
-            /*var r = confirm("Etes vous sur de bien vouloir supprimer ce RDV ?");
+            var r = confirm("Etes vous sur de bien vouloir supprimer ce RDV ?");
             if (r == true) {
-                cabinetService.delete('patients', patient.id).then(
+                cabinetService.delete('rdvs', rdv.id).then(
                     function successCallback(response) {
                         $route.reload();
                     }, function errorCallback(response) {
                         //.handle(response.status,'/') ;
                 }) ;
-            }*/
+            }
         }
   
 }])

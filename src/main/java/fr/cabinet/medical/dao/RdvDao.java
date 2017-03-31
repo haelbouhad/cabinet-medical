@@ -46,9 +46,10 @@ public class RdvDao implements IRdvDao {
     }
     
     @Override
-    public void delete(Rdv a)
+    public void delete(Long id)
     {
-        em.remove(a);
+        Rdv r = em.getReference(Rdv.class, id) ;
+        em.remove(r);
     }
     
     @Override
