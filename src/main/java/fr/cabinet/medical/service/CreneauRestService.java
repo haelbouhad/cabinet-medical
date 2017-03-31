@@ -6,14 +6,7 @@
 package fr.cabinet.medical.service;
 
 import fr.cabinet.medical.dao.ICreneauDao;
-import fr.cabinet.medical.dao.IRdvDao;
 import fr.cabinet.medical.entities.Creneau;
-import fr.cabinet.medical.entities.Patient;
-import fr.cabinet.medical.entities.Rdv;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -22,7 +15,6 @@ import javax.ejb.EJB;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
