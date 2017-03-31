@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 /**
  *
  * @author hassan
+ * @author ousmane
  */
 @Entity
 public class Creneau implements Serializable{

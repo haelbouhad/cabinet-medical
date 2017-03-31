@@ -26,6 +26,7 @@ import javax.ws.rs.core.MediaType;
 /**
  *
  * @author hassan
+ * @author ousmane
  */
 @Path("/medecins")
 @Produces(MediaType.APPLICATION_JSON)

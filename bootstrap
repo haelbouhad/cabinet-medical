@@ -1,0 +1,5 @@
+INSERT INTO `MEDECIN`(`NOM`, `PRENOM`) VALUES ("nomMedecin","prenomMedecin");
+INSERT INTO `PATIENT`(`NOM`, `PRENOM`) VALUES ("nomPatient","prenomPatient");
+INSERT INTO `CRENEAU` (`DEBUT`, `FIN`, `id_medecin`) VALUES ('2017-03-01 00:00:00', '2017-03-01 00:00:00', '1');
+INSERT INTO `CRENEAU` (`DEBUT`, `FIN`, `id_medecin`) VALUES ('2017-03-01 00:00:00', '2017-03-01 00:00:00', '1');
+INSERT INTO `RDV` (`DEBUT`, `FIN`, `id_creneau`, `id_patient`) VALUES ('2017-03-27 07:00:00', '2017-03-27 10:00:00', '1', '1');
