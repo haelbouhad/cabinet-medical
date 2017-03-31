@@ -6,7 +6,6 @@
 package fr.cabinet.medical.service;
 
 import fr.cabinet.medical.dao.IMedecinDao;
-import fr.cabinet.medical.dao.MedecinDao;
 import fr.cabinet.medical.entities.Medecin;
 import java.util.List;
 import java.util.Objects;

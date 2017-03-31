@@ -5,7 +5,6 @@
  */
 package fr.cabinet.medical.dao;
 
-import fr.cabinet.medical.entities.Medecin;
 import fr.cabinet.medical.entities.Patient;
 import java.util.List;
 import javax.ejb.Stateless;

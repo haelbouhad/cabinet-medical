@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.cabinet</groupId>
-    <artifactId>CabinetMedical</artifactId>
+    <artifactId>cabinet</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>CabinetMedical</name>
+    <name>cabinet</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
