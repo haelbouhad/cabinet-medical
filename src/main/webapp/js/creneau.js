@@ -75,6 +75,9 @@ angular.module('cabinetApp.creneau', ['ngRoute', 'datetime'])
             
             $scope.creneau = {}
             
+            $scope.creneau.debut = new Date
+            $scope.creneau.fin = new Date
+            
         }
         
         var jsonifyMedecin = function(){
