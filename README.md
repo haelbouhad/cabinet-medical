@@ -2,8 +2,6 @@
 
 Just run : git clone  https://github.com/haelbouhad/cabinet-medical.git
 
-The project's name has to be 'cabinet-medical', so that angular client can reach the server.
-
 # Launch script to create datasource
 
 Go to bin/ directory of your (glassfish) server and run the following command :
