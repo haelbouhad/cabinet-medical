@@ -13,11 +13,11 @@ var app = angular.module("cabinetApp", [
     'cabinetApp.services'
 ]);
 
-app.constant('apiUrl', window.location.origin + '/CabinetMedical')
+app.constant('apiUrl', window.location.origin + '/CabinetMedical') ;
 
 app.controller("cabinetApp", function (apiUrl, $scope, $http, $location) {
     console.log('cabinetApp')
-})
+}) ;
 
 app.config(['$locationProvider', '$routeProvider','$httpProvider', function($locationProvider, $routeProvider,$httpProvider) {
   
@@ -66,4 +66,4 @@ app.config(['$locationProvider', '$routeProvider','$httpProvider', function($loc
 
   $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript;charset=UTF-8';
 
-}])
+}]) ;

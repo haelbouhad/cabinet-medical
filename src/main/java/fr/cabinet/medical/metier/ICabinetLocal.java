@@ -6,7 +6,6 @@
 package fr.cabinet.medical.metier;
 
 import fr.cabinet.medical.entities.Creneau;
-import fr.cabinet.medical.entities.Patient;
 import fr.cabinet.medical.entities.Rdv;
 import java.util.Date;
 import java.util.List;
