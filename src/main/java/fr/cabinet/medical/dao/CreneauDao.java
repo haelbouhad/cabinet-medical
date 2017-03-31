@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -42,6 +43,15 @@ public class CreneauDao implements ICreneauDao {
     
     @Override
      public Long create(Creneau c){
+        Query q = em.createQuery("SELECT c FROM Creneau c "
+                + "WHERE c.medecin = :medecin "
+                + "AND ( (c.debut <= :new_fin AND c.debut > :new_debut ) OR ( c.fin > :new_debut AND c.fin <= :new_fin ) ) ");
+        q.setParameter("medecin", c.getMedecin());
+        q.setParameter("new_debut", c.getDebut());
+        q.setParameter("new_fin", c.getFin());
+        List<Creneau> conflict = q.getResultList();
+        if(conflict.size() > 0 )
+            throw new RuntimeException("Le médecin n'est pas disponible pour ce créneau");
         em.persist(c);
         return c.getId() ;
     }
